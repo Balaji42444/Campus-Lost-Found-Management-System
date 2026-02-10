@@ -1,0 +1,455 @@
+/* 🌈 UNIVERSAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #e3f2fd, #ede7f6);
+  color: #333;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+/* ===============================
+   🌟 HEADER / NAVBAR
+================================ */
+header {
+  background: linear-gradient(90deg, #4a00e0, #8e2de2);
+  color: #fff;
+  padding: 18px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.9em;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+header nav {
+  display: flex;
+  gap: 18px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #ffe600;
+  transition: 0.3s;
+}
+
+header nav a:hover::after,
+header nav a.active::after {
+  width: 100%;
+}
+
+header nav a:hover {
+  color: #ffe600;
+}
+
+/* ===============================
+   🧱 MAIN CONTAINER
+================================ */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.container h2 {
+  text-align: center;
+  color: #4a00e0;
+  font-size: 2em;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* ===============================
+   🎛 BUTTON GROUP
+================================ */
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(37, 117, 252, 0.4);
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+
+/* ===============================
+   🧾 FORM SECTION
+================================ */
+#formContainer {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+#formContainer.hidden {
+  display: none;
+}
+
+#formContainer h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+#itemForm input,
+#itemForm textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+  background: #fff;
+}
+
+#itemForm input:focus,
+#itemForm textarea:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 6px rgba(106, 17, 203, 0.3);
+}
+
+.file-label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 500;
+  color: #555;
+}
+
+#imagePreview img {
+  width: 100%;
+  max-height: 220px;
+  border-radius: 12px;
+  margin-top: 10px;
+  object-fit: cover;
+  border: 2px solid #ececec;
+  transition: transform 0.3s ease;
+}
+
+#imagePreview img:hover {
+  transform: scale(1.02);
+}
+
+/* ===============================
+   📦 POSTS GRID (3-COLUMN CLASSIC)
+================================ */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+  justify-items: center;
+  transition: all 0.3s ease;
+}
+
+/* 🧩 POST CARD */
+.post {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 280px;
+  padding: 12px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid #eee;
+  height: 320px; /* Uniform height for grid alignment */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* 🖼 IMAGE */
+.post img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+}
+
+/* 📋 TEXT */
+.post h3 {
+  margin: 6px 0;
+  font-size: 1em;
+  font-weight: 600;
+  color: #00897b;
+  text-transform: capitalize;
+}
+
+.post p {
+  margin: 2px 0;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.post p strong {
+  color: #000;
+}
+
+.date-time {
+  color: #777;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+/* ✅ MARK AS DONE */
+.done-btn {
+  background: linear-gradient(135deg, #00c853, #43a047);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 200, 83, 0.25);
+}
+
+.done-btn:hover {
+  background: linear-gradient(135deg, #43a047, #00c853);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 200, 83, 0.35);
+}
+
+/* ===============================
+   🌍 RESPONSIVENESS
+================================ */
+@media (max-width: 992px) {
+  .posts {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .posts {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .post {
+    height: 300px;
+  }
+
+  .post img {
+    height: 110px;
+  }
+
+  .post h3 {
+    font-size: 0.95em;
+  }
+
+  .post p {
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .posts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   🔹 FOOTER
+================================ */
+footer {
+  background: linear-gradient(90deg, #4a00e0, #8e2de2);
+  color: white;
+  padding: 60px 0 20px;
+  margin-top: 80px;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.footer-section {
+  flex: 1 1 280px;
+}
+
+.footer-section h3 {
+  color: #ffe600;
+  margin-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section ul {
+  font-size: 14px;
+  color: #eee;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #eee;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #ffe600;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 15px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+/* ===============================
+   ✨ ANIMATIONS
+================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.found-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.found-btn:hover {
+  background-color: #0056b3;
+}
+.item-card {
+  width: 300px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 20px;
+}
+
+.item-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.delete-btn {
+  width: 100%;
+  background: #ff3b30;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.delete-btn:hover {
+  background: #d7281f;
+}

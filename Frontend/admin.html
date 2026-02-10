@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - Campus Lost&Found Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <button class="btn" onclick="logout()">Logout</button>
+    <div id="postsContainer" class="posts"></div>
+  </div>
+
+  <script>
+    async function loadAllPosts() {
+      const token = localStorage.getItem('adminToken');
+      if (!token) {
+        alert('Unauthorized access!');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const res = await fetch('http://localhost:5000/api/items');
+      const data = await res.json();
+
+      const container = document.getElementById('postsContainer');
+      container.innerHTML = '';
+
+      data.forEach(post => {
+        const card = document.createElement('div');
+        card.classList.add('post');
+        card.innerHTML = `
+          ${post.img ? `<img src="${post.img}" alt="${post.item}">` : ""}
+          <h3>${post.item}</h3>
+          <p><b>Type:</b> ${post.type}</p>
+          <p><b>Location:</b> ${post.location}</p>
+          <p><b>Description:</b> ${post.desc}</p>
+          <p><b>By:</b> ${post.person}</p>
+          <p><b>Contact:</b> ${post.contact}</p>
+          <p><i>${post.dateTime}</i></p>
+          <button class="delete-btn" onclick="deletePost('${post._id}')">Delete</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function deletePost(id) {
+      await fetch(`http://localhost:5000/api/items/${id}`, { method: 'DELETE' });
+      loadAllPosts();
+    }
+
+    function logout() {
+      localStorage.removeItem('adminToken');
+      window.location.href = 'login.html';
+    }
+
+    window.onload = loadAllPosts;
+  </script>
+</body>
+</html>
